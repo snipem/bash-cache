@@ -1,0 +1,17 @@
+#!/bin/bash
+
+command=$*
+command_hash=$(echo "$command" | md5sum | awk '{print $1}')
+
+cache_folder_prefix=/tmp/bash_cache
+cache_folder=$cache_folder_prefix/$command_hash
+
+[ -d "$cache_folder" ] || mkdir -p "$cache_folder"
+
+cache_stdout=$cache_folder/stdout
+
+if [ ! -f "$cache_stdout" ]; then
+    bash -c "$command" > "$cache_stdout"
+fi
+
+cat "$cache_stdout"
