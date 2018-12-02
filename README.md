@@ -19,3 +19,5 @@ The first call takes about 1201ms while the following cached call is only 29ms. 
 ## TODO
 
 * There is currently no option for deleting the cache. Calls will always be cached.
+* Does not cache stderr
+* Does not cache exit code
