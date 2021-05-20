@@ -38,12 +38,14 @@ fi
 [ -d "$cache_folder" ] || mkdir -p "$cache_folder"
 
 cache_stdout=$cache_folder/stdout
+cache_stderr=$cache_folder/stderr
 cache_errcode=$cache_folder/cache_errcode
 
 if [ ! -f "$cache_stdout" ]; then
-    bash -c "$command" > "$cache_stdout"
+    bash -c "$command" 1> "$cache_stdout" 2> "$cache_stderr"
     echo $? > "$cache_errcode"
 fi
 
 cat "$cache_stdout"
+cat "$cache_stderr" 1>&2;
 exit "$(cat "$cache_errcode")"

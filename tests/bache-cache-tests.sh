@@ -56,3 +56,8 @@ setup () {
   run ./bash-cache exit 2
   assert_failure 2
 }
+
+@test "cache-stderr" {
+   ./bash-cache ">&2 echo error" 2>&1 | grep error
+   ./bash-cache ">&2 echo error" 2>&1 | grep error
+}

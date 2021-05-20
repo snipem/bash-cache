@@ -26,7 +26,3 @@ tail -n 1  0.00s user 0.00s system 18% cpu 0.028 total
 # Will cache the call only for 2 hours, call will be made if the cache age exceeds 2 hours
 $ ./bash-cache -t 2h elinks --dump kernel.org 
 ```
-
-## TODO
-
-* Does not cache stderr
