@@ -1,10 +1,40 @@
 #!/bin/bash
 
-command=$*
+ while getopts 't:' flag; do
+ # shellcheck disable=SC2220
+ case "${flag}" in
+     t) timeout="${OPTARG}";;
+     *) print_usage
+     exit 1 ;;
+ esac
+ done
+
+if [ -n "$timeout" ]
+then
+    command=$(echo "$*" | cut -d ' ' -f3-)
+else
+    command=$*
+fi
+
+if [ -z "$command" ]
+then
+      print_usage
+      exit 1
+fi
+
 command_hash=$(echo "$command" | md5sum | awk '{print $1}')
 
-cache_folder_prefix=/tmp/bash_cache
+cache_folder_prefix=$TMPDIR/bash_cache
 cache_folder=$cache_folder_prefix/$command_hash
+
+# If timeout is set and folder is older than
+ if [ -n "$timeout" ]
+ then
+  if test "$(find "$cache_folder" -mtime +"$timeout")"
+  then
+    rm -r "$cache_folder"
+  fi
+fi
 
 [ -d "$cache_folder" ] || mkdir -p "$cache_folder"
 
