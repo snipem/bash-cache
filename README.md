@@ -29,6 +29,4 @@ $ ./bash-cache -t 2h elinks --dump kernel.org
 
 ## TODO
 
-* There is currently no option for deleting the cache. Calls will always be cached.
 * Does not cache stderr
-* Does not cache exit code

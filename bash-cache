@@ -1,7 +1,6 @@
 #!/bin/bash
 
  while getopts 't:' flag; do
- # shellcheck disable=SC2220
  case "${flag}" in
      t) timeout="${OPTARG}";;
      *) print_usage
@@ -39,9 +38,12 @@ fi
 [ -d "$cache_folder" ] || mkdir -p "$cache_folder"
 
 cache_stdout=$cache_folder/stdout
+cache_errcode=$cache_folder/cache_errcode
 
 if [ ! -f "$cache_stdout" ]; then
     bash -c "$command" > "$cache_stdout"
+    echo $? > "$cache_errcode"
 fi
 
 cat "$cache_stdout"
+exit "$(cat "$cache_errcode")"
