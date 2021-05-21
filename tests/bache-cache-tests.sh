@@ -10,7 +10,7 @@ setup () {
 }
 
 
-@test "normalrun" {
+@test "normal-run" {
 
   date_before=$(./bash-cache date +"%s")
   sleep 2s
@@ -20,7 +20,7 @@ setup () {
   assert_success
 }
 
-@test "withtimeout-use-cache" {
+@test "with-timeout-use-cache" {
 
   date_before=$(./bash-cache date +"%s")
 
@@ -35,7 +35,7 @@ setup () {
   assert_success
 }
 
-@test "withtimeout-do-not-use-cache" {
+@test "with-timeout-do-not-use-cache" {
 
   date_before=$(./bash-cache date +"%s")
 
