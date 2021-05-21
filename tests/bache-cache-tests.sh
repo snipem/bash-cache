@@ -46,3 +46,18 @@ setup () {
   echo $date_before | assert_output
   assert_success
 }
+
+@test "exit-code" {
+
+  run ./bash-cache exit 2
+  assert_failure 2
+
+  # Run again, exit code should be cached
+  run ./bash-cache exit 2
+  assert_failure 2
+}
+
+@test "cache-stderr" {
+   ./bash-cache ">&2 echo error" 2>&1 | grep error
+   ./bash-cache ">&2 echo error" 2>&1 | grep error
+}
