@@ -39,7 +39,7 @@ fi
 
 cache_stdout=$cache_folder/stdout
 cache_stderr=$cache_folder/stderr
-cache_errcode=$cache_folder/cache_errcode
+cache_errcode=$cache_folder/errcode
 
 if [ ! -f "$cache_stdout" ]; then
     bash -c "$command" 1> "$cache_stdout" 2> "$cache_stderr"
